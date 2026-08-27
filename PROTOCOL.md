@@ -18,8 +18,10 @@ demonstrably exist before the data does.
 INTENDED MECHANISM: a git commit, tagged v1.0-prereg, whose timestamp is independently
 verifiable by any reader.
 
-ACTUAL MECHANISM AT TIME OF WRITING: this document's Google Drive creation timestamp and
-revision history. No git repository or GitHub connection exists for this project yet.
+ACTUAL MECHANISM: this protocol was committed verbatim to a public git
+repository at github.com/MaverickThompson/paper-trading-study before the
+study window opened. The commit hash and timestamp are publicly verifiable
+and constitute the pre-registration of record.
 
 This is a WEAKER form of evidence. Drive revision history is visible to the account owner
 and can in principle be circumvented by creating a new document. A git commit hash cannot.
