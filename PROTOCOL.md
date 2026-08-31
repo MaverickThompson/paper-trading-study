@@ -352,16 +352,31 @@ happens rather than planned.
 
 No counterfactuals. The phrase "would have returned" does not appear in any output of this
 study. The system did what it did.
-
 ================================================================
 12. STUDY REGISTER (append-only)
 ================================================================
 
 PRE-REGISTRATION
-  Written:            2026-08-07
-  Git commit hash:    [PENDING — see Section 0]
-  Tag:                [PENDING — v1.0-prereg]
-  Random control seed:[TO BE FIXED BEFORE DAY 1]
+  Drafted:            2026-08-07
+  Committed:          2026-08-31
+  Repository:         github.com/MaverickThompson/paper-trading-study
+  Commit of record:   4065efb38484c2ce866a6437f8a5da26a7ae4e1c
+                      ("add research protocol for 60 day trading study")
+  Correction commit:  87695b83fc262ffaec481b78037d4199d9c50f4f
+                      (Section 0 updated to reflect that the repository
+                       now exists; original text preserved in history)
+  Tag:                [pending — v1.0-prereg]
+  Random control seed: 764960210
+                      Generated 2026-08-31T05:26:10Z via Python
+                      secrets.randbelow(10**9), before any trade existed.
+
+  NOTE ON DATES: the drafting date is asserted, not provable. The binding
+  timestamp is the commit date of 4065efb. Any claim of precedence rests
+  on that commit, not on the drafting date.
+
+EXECUTION VENUE
+  Alpaca paper account PA3CS6MXKSX5, verified ACTIVE with $100,000 cash
+  and zero open positions on 2026-08-31, before day 1.
 
 DRY RUN
   Date:               [pending]
@@ -374,7 +389,17 @@ STUDY WINDOW
   Day 60:             [pending]
 
 AMENDMENT LOG
-  (none)
+  2026-08-31 — Section 7 fill model.
+    Defect: at pre-registration no Alpaca connector was available, so the
+    protocol specified a fallback model of study-computed fills from quoted
+    bid/ask.
+    Change: Alpaca paper account connected and authenticated. Fills will be
+    broker-executed with independent order IDs and timestamps. The Section 7
+    fallback model is superseded; its caveat about "no independent execution
+    record" no longer applies.
+    Reason: the intended mechanism became available. No entry, exit, sizing
+    or universe parameter was altered.
+    Timing: before day 1. No v1/v2 break required.
 
 ================================================================
 13. WHAT WOULD MAKE THIS STUDY WORTHLESS
