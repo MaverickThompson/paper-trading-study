@@ -104,9 +104,35 @@ extremes or with unusual volume. The paper must state that the effective univers
 equities above $2B", and must not claim broad-market coverage.
 
 ================================================================
-4. SIGNAL LOGIC (FROZEN)
+4.0 PROVENANCE AND ATTRIBUTION
 ================================================================
 
+THE STRATEGY IS NOT ORIGINAL TO THIS STUDY.
+
+Source: [NAME / AUTHOR / SITE]
+Location: [URL OR CITATION]
+Accessed: [DATE]
+
+The operator did not design this strategy. It was found published and is
+being implemented as specified. The contribution of this study is therefore
+NOT the strategy. It is:
+  - independent, pre-registered implementation of a published method
+  - a complete signal-level record including rejected candidates
+  - honest reporting of what happened over a fixed 60-day window
+
+The paper must state this in the abstract and introduction, in plain terms.
+It must NOT describe the strategy as designed, developed or discovered by
+the operator. The defensible claim is:
+
+  "I implemented a published strategy without modification, pre-registered
+   the protocol, ran it for 60 days, and documented the outcome."
+
+That is a replication study. Replication is undersupplied in retail trading
+literature and is a legitimate contribution. Misrepresenting it as original
+work is not, and would invalidate the study on discovery.
+
+DEVIATIONS FROM THE SOURCE, if any, are listed here and nowhere else:
+  [NONE / list each with reason]
 The system is a TWO-LAYER process. Both layers are logged separately.
 
 LAYER 1 — MECHANICAL FILTER (fully reproducible)
