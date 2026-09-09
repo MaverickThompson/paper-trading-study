@@ -109,9 +109,9 @@ equities above $2B", and must not claim broad-market coverage.
 
 THE STRATEGY IS NOT ORIGINAL TO THIS STUDY.
 
-Source: [NAME / AUTHOR / SITE]
-Location: [URL OR CITATION]
-Accessed: [DATE]
+Source:  Daniel Jurafsky & James H. Martin
+Location: https://web.stanford.edu/~jurafsky/slp3/
+Accessed: 8/7/2026
 
 The operator did not design this strategy. It was found published and is
 being implemented as specified. The contribution of this study is therefore
