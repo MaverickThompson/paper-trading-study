@@ -109,9 +109,16 @@ equities above $2B", and must not claim broad-market coverage.
 
 THE STRATEGY IS NOT ORIGINAL TO THIS STUDY.
 
-Source:  Daniel Jurafsky & James H. Martin
-Location: https://web.stanford.edu/~jurafsky/slp3/
-Accessed: 8/7/2026
+METHOD SOURCE (regime model):
+Daniel Jurafsky & James H. Martin, Speech and Language Processing, 3rd ed.
+draft, Appendix A: Hidden Markov Models.
+https://web.stanford.edu/~jurafsky/slp3/  — accessed 2026-08-07.
+
+STRATEGY SOURCE (screening and risk rules): not taken from a single published
+system. The Layer 1 filter and the Section 6 sizing rules are assembled from
+standard value-screening and risk criteria. No claim of originality is made
+for them either.
+
 
 The operator did not design this strategy. It was found published and is
 being implemented as specified. The contribution of this study is therefore
