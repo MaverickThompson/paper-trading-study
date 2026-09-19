@@ -398,7 +398,13 @@ PRE-REGISTRATION
   Correction commit:  87695b83fc262ffaec481b78037d4199d9c50f4f
                       (Section 0 updated to reflect that the repository
                        now exists; original text preserved in history)
-  Tag:                [pending — v1.0-prereg]
+  Tag:                v1.0-prereg
+                      Created 2026-09-19, before the study window opened and
+                      before any trade existed. Annotated tag on the commit of
+                      record above. That commit's timestamp, not the tag's,
+                      is what establishes precedence; the tag is a permanent,
+                      citable label pointing at it.
+                      github.com/MaverickThompson/paper-trading-study/releases/tag/v1.0-prereg
   Random control seed: 764960210
                       Generated 2026-08-31T05:26:10Z via Python
                       secrets.randbelow(10**9), before any trade existed.
