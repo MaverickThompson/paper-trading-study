@@ -439,7 +439,54 @@ AMENDMENT LOG
     Reason: the intended mechanism became available. No entry, exit, sizing
     or universe parameter was altered.
     Timing: before day 1. No v1/v2 break required.
+IMPLEMENTATION MAPPINGS
+  Recorded:           2026-09-21, before day 1 and before any trade existed.
+  Reason for record:  PROTOCOL.md specifies the study precisely but does not
+                      define every quantity the implementation must supply.
+                      Six mappings were required. Each is fixed here in advance
+                      rather than left implicit in code, so that none of them
+                      can later be mistaken for a decision made after seeing
+                      results. None alters an entry or exit condition.
 
+  1. Predicted probability
+       Section 5 requires a predicted probability of reaching Target 1.
+       The five-agent debate produces a manager confidence
+       (ManagerVerdict.confidence). These are not necessarily the same
+       quantity. Manager confidence is used as the Section 5 predicted
+       probability. The paper must state this.
+
+  2. Entry zone
+       Section 5 requires an entry zone and a fill inside it. TradeIdea
+       supplies a single entry price. The zone is entry +/- 10% of the risk
+       distance (entry - stop), scaled to the trade rather than a flat
+       percentage so it means the same on a $20 and a $600 stock. Paying
+       more than a tenth of the risk above plan erodes the 2:1 the trade
+       was approved on, so the band also protects the R:R gate.
+
+  3. Falsification condition
+       Section 5 requires a falsification condition distinct from the stop.
+       ManagerVerdict.conditions is used where the manager supplies any;
+       otherwise it defaults to a daily close through the stop.
+
+  4. Earnings blackout when the calendar is unavailable
+       Section 5 requires no scheduled earnings within 48 hours. The
+       calendar (Alpha Vantage EARNINGS_CALENDAR, cached daily) may be
+       unreachable. An unknown earnings position FAILS the gate and the
+       candidate is rejected. "Could not be checked" is not a way of
+       satisfying "no earnings within 48 hours".
+
+  5. Round-number stops
+       Section 5 prohibits round-number stops without defining the term.
+       Implemented as: within one cent of a whole or half dollar.
+
+  6. Stop precedence on a bar touching both stop and target
+       Where a single observation satisfies both the stop and a target, the
+       stop is taken. Assuming the favourable side is the most common
+       mechanism by which a paper study flatters itself.
+
+  Implementation:     stock-agent @ study_rules.py, study_adapter.py,
+                      earnings.py, session.py
+  Verification:       77 unit tests, run before day 1.
 ================================================================
 13. WHAT WOULD MAKE THIS STUDY WORTHLESS
 ================================================================
