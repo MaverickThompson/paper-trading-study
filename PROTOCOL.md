@@ -487,6 +487,15 @@ IMPLEMENTATION MAPPINGS
   Implementation:     stock-agent @ study_rules.py, study_adapter.py,
                       earnings.py, session.py
   Verification:       77 unit tests, run before day 1.
+  DRY RUN
+  Date:               2026-09-21
+  signals.csv rows:   3
+  trades.csv rows:    0
+  Result:             PASSED
+
+STUDY WINDOW
+  Day 1:              2026-09-23
+  Day 60:             2026-12-16
 ================================================================
 13. WHAT WOULD MAKE THIS STUDY WORTHLESS
 ================================================================
