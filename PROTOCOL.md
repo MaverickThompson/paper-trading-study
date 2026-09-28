@@ -415,6 +415,68 @@ and 3h32m on 2026-09-21 and 2026-09-22 — which is accepted rather than
 corrected, since altering the schedule mid-study would itself be an
 amendment.
 ​
+2026-09-28 — Section 5 Target 1 placement. Defect correction, and a declared v1/v2 break.
+
+Defect. Section 5 requires "reward-to-risk to Target 1 >= 2.0 : 1, computed with entry
+at the ASK and exits at the BID." Section 5 does not say where Target 1 sits. That makes
+Target 1's placement a quantity the implementation must supply — the same category as the
+six already recorded under IMPLEMENTATION MAPPINGS below. No such mapping was recorded.
+
+In its absence the code used config.py's target_r_multiples = (1.5, 3.0), a default
+inherited from the backtest engine that predates this study. Targets are computed as
+entry + risk x multiple, so Target 1 at 1.5R makes the reward-to-risk ratio 1.5 BY
+CONSTRUCTION. A constant 1.5 can never satisfy a floor of 2.0. The Section 5 entry gate
+was unsatisfiable from day 1, and the study could not execute as written.
+
+Evidence, derived from source rather than from results. The contradiction is provable by
+reading two files and requires no data: study_rules.MIN_REWARD_TO_RISK = 2.0 against
+config.target_r_multiples[0] = 1.5. It is visible in the log as a corroborating symptom —
+every reward-to-risk value ever recorded falls between 1.30 and 1.47, nine observations
+across nine different securities, none above 1.47, clustered just under the 1.5 ceiling
+the arithmetic imposes. trades.csv was header-only when this was found and remained so
+when the change was made.
+
+Neither number had ever been modified. MIN_REWARD_TO_RISK = 2.0 was introduced in commit
+c17cc26 and target_r_multiples = (1.5, 3.0) in commit f4a4824, in separate pieces of work
+with separate purposes, and git history shows no subsequent edit to either. This is an
+integration defect between a backtest default and a protocol rule, not a parameter anyone
+chose or later reconsidered.
+
+Change. The missing mapping is recorded here: Target 1 at 2.0R, Target 2 at 4.0R,
+preserving the existing 1:2 ratio between them. 2.0R is the MINIMUM value Section 5
+permits. It is forced by the frozen floor rather than selected, and no smaller value can
+satisfy the protocol. Stop derivation, position sizing, risk per trade, the universe, the
+probability-edge requirement, the expected-value test and both log schemas are untouched.
+tests/test_study_rules.py now asserts min(target_r_multiples) >= MIN_REWARD_TO_RISK so the
+gate can never again be made unsatisfiable without a test failing.
+
+Reason. Conformance with Section 5 as written. Not motivated by results: no trade and no
+P&L existed at any point before or during this change. Not motivated by a deadline. Not
+motivated by trade count — the defect is demonstrable with the market closed and no data
+collected. That more trades will follow is a consequence of a gate becoming satisfiable,
+not the purpose of the change.
+
+Decision — V1/V2 BREAK, not a restart. The clock stopped on 2026-09-28.
+  v1: Day 1 (2026-09-23) through 2026-09-28. 44 signal rows, zero trades, zero orders,
+      trades.csv header-only. Reported separately and never pooled with v2.
+  v2: begins at the first regular session after the commit carrying this entry.
+      Day 60 is unchanged at 2026-12-16.
+A restart was considered and rejected: v1 contains no trades and therefore nothing that
+could contaminate a pooled result, and restarting would push the window past the operator's
+stated end date. The paper reports both segments, with n stated for each.
+
+Also corrected in the same commit, neither affecting any parameter:
+  (a) Twenty signal rows dated 2026-09-24 were removed from study/signals.csv by commit
+      cefbebd on 2026-09-24, violating Section 10's append-only rule. They are restored
+      verbatim from commit d219f07 in their original chronological position. No row was
+      edited; the deletion was the error and is undone.
+  (b) scripts/wait_for_market_open.py waited without limit for the next open. A firing
+      landing after the close would sleep until the following morning and be killed by the
+      20-minute job timeout, taking the Section 10 market_closed row with it. The wait is
+      now capped at 30 minutes, after which the session proceeds and logs normally.
+
+Reported at full length in the paper's "What broke" section, per Section 11.
+
 IMPLEMENTATION MAPPINGS
 Recorded:           2026-09-21, before day 1 and before any trade existed.
 Reason for record:  PROTOCOL.md specifies the study precisely but does not
